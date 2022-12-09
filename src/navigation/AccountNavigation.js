@@ -4,7 +4,6 @@ import AccountScreen from '../../screens/Account';
 
 const Stack = createStackNavigator();
 
-
 export default function AccountNavigation() {
   return (
     <Stack.Navigator>
