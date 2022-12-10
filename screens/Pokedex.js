@@ -6,6 +6,7 @@ import PokemonList from '../src/components/PokemonList';
 export default function Pokedex() {
 
   const [pokemons, setPokemons] = useState([]);
+  const [nextUrl, setnextUrl] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -15,7 +16,8 @@ export default function Pokedex() {
 
   const loadPokemons = async () => {
     try {
-      const response = await getPokemonsApi();
+      const response = await getPokemonsApi(nextUrl);
+      setnextUrl(response.next);
 
       const pokemonsArray = [];
 
@@ -40,7 +42,11 @@ export default function Pokedex() {
 
   return (
     <SafeAreaView>
-      <PokemonList pokemons={pokemons} />
+      <PokemonList
+        pokemons={pokemons}
+        loadPokemons={loadPokemons}
+        hasNext={nextUrl}
+      />
     </SafeAreaView>
   );
 }
